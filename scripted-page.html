@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+  <title>Form with validation</title>
+    <script type="text/javascript">
+    function checkform() {
+        if (document.registration_form.given_name.value == "") {
+            alert("Please provide your given name!");
+            document.registration_form.given_name.focus();
+            return false;
+        }
+        if (document.registration_form.surname.value == "") {
+            alert("Please provide your surname!");
+            document.registration_form.surname.focus();
+            return false;
+        }
+        email = document.registration_form.email.value;
+        if (email == "") {
+            alert("Please provide your Email!");
+            document.registration_form.email.focus();
+            return false;
+        } else {
+            atpos = email.indexOf("@");
+            dotpos = email.lastIndexOf(".");
+
+            if (atpos < 1 || (dotpos - atpos < 2)) {
+                alert("Please enter correctly formed email")
+                document.registration_form.email.focus();
+            return false;
+        }
+        return true;
+    }
+    </script>
+</head>
+
+<body>
+<h1>Page with form with validation.</h1>
+
+<h2>A sample form</h2>
+
+<form action="register.cgi"
+      name="registration_form"
+      method="post"
+      onsubmit="return checkform();">
+  <label for="given_name">Given name: </label><input type="text" name="given_name" id="given_name"/>
+  <label for="surname">Surname: </label><input type="text" name="given_name" id="surname"/><br/>
+  <label for="email">Email: </label><input type="email" name="email" id="email"/><br/>
+  <label for="language">Language:</label>
+  <select name="language">
+    <option value="german">Deutsch</option>
+    <option value="french">Français</option>
+    <option selected value="albanian">Shqip</option>
+  </select>
+  <br/>
+  <input type="radio" name="level" id="beginner" value="beginner"><label for="beginner">Beginner</label><br/>
+  <input type="radio" id="level" value="intermediate"><label for="intermediate">Intermediate</label><br/>
+  <input type="radio" id="level" value="advanced"><label for="advanced">Advanced</label><br/>
+  <input type="checkbox" name="underestimate"/>
+  <label for="underestimate">I tend to underestimate my abilities</label><br>
+  <input type="hidden" name="ticket" value="34912376"/>
+  <label for="check">Check form:</label><input type="button" name="check" value="Check" onClick="checkform('general')"></input><br/>
+  <input type="submit" value="Submit"/><br/>
+</form>
+
+</body>
+</html>

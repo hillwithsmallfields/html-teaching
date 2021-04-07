@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+  <title>This is the title of the page.</title>
+<!-- This is a comment.  The browser etc will ignore it. -->
+<style>
+p.warning {
+  color: red;
+  size: large;
+}
+.lists {
+  color: green;
+}
+.techterm {
+  font-family: monospace;
+}
+</style>
+</head>
+
+<body>
+<h1>This is a top-level heading.</h1>
+
+<p>This is a paragraph.</p>
+
+<p>Here's another paragraph, with a link to
+  the <a href="https://www.bbc.co.uk/news">BBC News home page</a>.</p>
+
+<p class="warning"><span lang="de">Achtung!</span> This paragraph is a warning!</p>
+
+<blockquote>This paragraph is a block quote, and browsers may display
+  it differently.  It's an old construct, and it's probably better to
+  use stylesheets for such effects now they are available.</blockquote>
+
+<div class="lists">
+<ul>
+  <li>This is the first item in a bulleted list.</li>
+  <li>And the is the second item.</li>
+  <li>UL stands for Unordered List.</li>
+</ul>
+
+<ol>
+  <li>This is the first item in a numbered list.</li>
+  <li>And the is the second item.</li>
+  <li>OL stands for Ordered List.</li>
+</ol>
+
+<dl>
+  <dt>This is a definition term (DT)</dt>
+  <dd>And this is the corresponding definition, in a Definition List.</dd>
+  <dt>This is another term</dt>
+  <dd>And this is another definition.</dd>
+</dl>
+</div>
+
+<h2>Sample table</h2>
+
+<p>This is a table of language courses with a column for each language
+  and a row for each level.  The first row is entirely headers (with a
+  gap at the start because the first column is row labels and so
+  doesn't have a header).  The second and third level French courses
+  are combined, so the cell for those has a <span
+  class="techterm">rowspan</span> set to make it extend into the next
+  row, and the next row has one cell fewer, to make room for this.
+  You can also use <span class="techterm">colspan</span> to extend
+  cells sideways.</p>
+
+<table border>
+  <tr>
+    <td><!-- just a comment, no visible contents --></td>
+    <th lang="de">Deutsch</th>
+    <th lang="fr">Français</th>
+    <th lang="sq">Shqip</th>
+  </tr>
+  <tr>
+    <th>Beginner</th>
+    <td>DE-101</td>
+    <td>FR-101</td>
+    <td>SQ-101</td>
+  </tr>
+  <tr>
+    <th>Intermediate</th>
+    <td>DE-201</td>
+    <td rowspan="2">FR-201/301</td>
+    <td>SQ-201</td>
+  </tr>
+  <tr>
+    <th>Advanced</th>
+    <td>DE-301</td>
+    <td>SQ-301</td>
+  </tr>
+</table>
+
+<h2>A sample form</h2>
+
+<p>This section contains a form for registering for language courses,
+  to match the table in the previous section.</p>
+
+<form action="register.cgi" method="post">
+  <label for="given_name">Given name: </label><input type="text" id="given_name"/>
+  <label for="surname">Surname: </label><input type="text" id="surname"/><br/>
+  <label for="email">Email: </label><input type="email" id="email"/><br/>
+  <label for="language">Language:</label>
+  <select name="language">
+    <option value="german">Deutsch</option>
+    <option value="french">Français</option>
+    <option selected value="albanian">Shqip</option>
+  </select>
+  <br/>
+  <input type="radio" name="level" id="beginner" value="beginner"><label for="beginner">Beginner</label><br/>
+  <input type="radio" id="level" value="intermediate"><label for="intermediate">Intermediate</label><br/>
+  <input type="radio" id="level" value="advanced"><label for="advanced">Advanced</label><br/>
+  <input type="checkbox" name="underestimate"/>
+  <label for="underestimate">I tend to underestimate my abilities</label><br>
+  <input type="hidden" name="ticket" value="34912376"/>
+  <input type="submit" value="Submit"/><br/>
+</form>
+
+</body>
+</html>
