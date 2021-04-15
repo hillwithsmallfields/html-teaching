@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>A page with audio styling</title>
+<style>
+.man {
+  voice-family: male;
+  richness: 90;
+  azimuth: left;
+  pitch: low;
+}
+
+.woman {
+  voice-family: female;
+  richness: 90;
+  azimuth: right;
+  pitch: medium;
+}
+
+.boy {
+  voice-family: male;
+  richness: 30;
+  azimuth: right;
+  pitch: high;
+}
+
+.girl {
+  voice-family: female;
+  richness: 30;
+  azimuth: left;
+  pitch: x-high;
+}
+
+.wordednumbers {
+  speak-numeral: continuous;
+}
+
+.digitnumbers {
+  speak-numeral: digits;
+}
+
+.spelledout {
+  speak: spell-out;
+}
+
+.hush {
+  volume: soft;
+  speech-rate: fast;
+}
+
+</style>
+</head>
+
+<body>
+<h1>A page with audio styling</h1>
+
+<p class="woman">This paragraph should be spoken by a woman on the
+  right.  This number should be spoken as one
+  quantity: <span class="wordednumbers">1234567</span> and this one
+  as digits: <span class="wordednumbers">1234567</span>.</p>
+
+<p class="man">This paragraph should be spoken by a man on the left.
+  This should be <span class="spelledout">spelled out</span>.</p>
+
+<p class="girl">This paragraph should be spoken by a girl on the left
+  <span class="hushed">and she will say this quickly and quietly</span>.</p>
+
+<p class="boy">This paragraph should be spoken by a boy on the right.</p>
+
+</body> </html>
