@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Using APIs</title>
+</head>
+
+<body>
+<h1>Using APIs</h1>
+
+<p>A web API (Application Programming Interface) is a service provided
+by a web server with input and output intended for use from programs.
+It is accessed via http and https like the rest of the web, but the
+"pages" it produces are meant for parsing by programs rather than for
+display on the screen.  As they are usually some kind of textual data,
+they may even be more suitable for screen readers than their regular
+HTML page counterparts, as there's less scope for messing around and
+sticking lots of rubbish in.  Also, they don't normally contain
+adverts!</p>
+
+<p>The output can be in any format, but two are commonest: JSON and
+XML.  JSON is based on the subset of JavaScript that is used to write
+pieces of data inline in programs; Python, and some other languages,
+use much the same syntax for this, so it's a good match for writing
+programs to use the data in many languages.  XML is like HTML, but you
+can define your own sets of tags.  It's harder to parse, and not as
+similar to data structures you'd typically want in a program, so I
+suggest going for the JavaScript output if the server gives you a
+choice.</p>
+
+<h2>A quick introduction to JSON and data structures</h2>
+
+<p>In the sample scripts in <a href="scripted-page.html">the scripted
+page example</a> you can see some literal data in the form of
+<code>"strings"</code>, which are surrounded in double-quote marks.
+These can also be used in JSON.  You can also see the numeric
+constants <code>1</code> and <code>2</code>, and the boolean constants
+<code>true</code> and <code>false</code>; these all can also appear in
+JSON.</p>
+
+<p>There are two ways to make compound data structures in JSON (and in
+programming languages that support JSON-like data): <dfn>lists</dfn>
+and <dfn>dictionaries</dfn>.</p>
+
+<h3>Lists</h3>
+
+<p>Lists are simply sequences of values, and can be <dfn>indexed</dfn>
+into by number, that is, you can refer to the <dfn>elements</dfn> of
+the list by their position in the list, always starting from zero.
+Lists are written in square brackets, with commas between the
+elements.  In JavaScript, you could initialize a variable to hold a
+literal list like this:</p>
+
+<pre>
+var herbs = ["tarragon", "thyme", "sage", "bay", "marjoram"];
+</pre>
+
+<h4>Using lists in programs</h4>
+
+<p>Programming languages commonly use square brackets after the name
+of a list variable to indicate indexing into the list, so
+<code>herbs[2]</code> refers to the third element of
+<code>herbs</code> (remember the first element is element zero).</p>
+
+<p>In JavaScript, you could <dfn>iterate</dfn> over the elements of
+the array like this, printing them to the console log (which you can
+get at through your browser if running it as part of a web page):</p>
+
+<pre>
+for (var i = 0; i < herbs.length; i++) {
+    console.log(herbs[i]);
+}
+</pre>
+
+<p>JavaScript's <code>for</code> loop statement (for repeating things
+with changing values of a control variable) has three things in
+brackets after the keyword <code>for</code> (with semicolons between
+them), and some statements after it, with curly brackets to delimit
+the scope of the <code>for</code>.  The first thing in the brackets is
+how to start the loop; the second is the condition for continuing it;
+and the third is how to step from one value to the next.
+<code>i++</code> is a short way of writing <code>i = i+1</code>.</p>
+
+<p>Here's the same example in Python, which has a cleaner syntax and
+is more powerful:</p>
+
+<pre>
+herbs = ["tarragon", "thyme", "sage", "bay", "marjoram"]
+for h in herbs:
+    print(herbs[h])
+</pre>
+
+<p>Further code snippets on this page will all be in Python; it's much
+nicer than JavaScript!</p>
+
+<p>You can also add things to a list:</p>
+
+<pre>
+herbs.append("oregano")
+</pre>
+
+<p>And you can overwrite elements of a list:</p>
+
+<pre>
+herbs[1] = "basil"
+</pre>
+
+<h4>Strings</h4>
+
+<p>Strings can be treated as lists of characters, but you can't modify
+them.  You can index into them by number, just like lists.</p>
+
+<h3>Dictionaries</h3>
+
+<p>Dictionaries are similar to lists, but contain <dfn>key-value
+pairs</dfn>, and you can look things up in the dictionary by giving
+the key, and will get the value back.  Dictionary literals are written
+between curly brackets, with a colon between the key and the value,
+and a comma between successive pairs; access to dictionary elements is
+done using square brackets, however, just like for lists.  You can use
+a wide variety of things as dictionary keys, except for anything that
+you can modify.  (You can put anything in the value part of each pair).</p>
+
+<p>The keys of a dictionary must be unique, and there is no concept of
+what order the key-value pairs are in.</p>
+
+<pre>
+animal_types = {
+    "cat": "feline",
+    "lion": "feline",
+    "dog": "canine",
+    "fox": "canine",
+    "wolf": "canine",
+    "seal": "pinniped",
+    "bear": "ursine"
+}
+</pre>
+
+<p>Accessing a dictionary looks like this:
+<code>animal_types["lion"]</code> which will yield
+<code>"feline"</code>.</p>
+
+<p>You can add elements to a dictionary like this:
+<code>animal_types["spider"] = "arthropod"</code>.</p>
+
+<h2>An example API: OpenStreetMap's Nominatim service</h2>
+
+<p>Now we've seen enough of what JSON looks like to be able to make
+sense of an example.  I picked a free example, part of the
+openstreetmap system, that you don't have to register for, and which
+provides a textual form of data that is normally presented on a map;
+so this example has potential to be useful for accessibility.</p>
+
+<p>Although the output is intended for reading into a program, it is
+possible to access it through a normal browser, and you can make up
+queries by typing them into the address bar of a browser.</p>
+
+<h3>The URL format</h3>
+
+<p>Query URLs normally have a question mark after the site and page
+name, with a series of key-value pairs after it, with an equals sign
+between the key and the value, and an ampersand between the pairs.  If
+you need to put a space in the query, replace it with a plus sign.</p>
+
+<p>The details are documented on the nominatim website
+<a href="https://nominatim.org/release-docs/latest/api/Search/#parameters">here</a>.</p>
+
+<p>Here are some examples.  You can simply follow the links from this
+page to bring them up in your browser.  In Firefox, it will probably
+do a fancy "folding" display, but it has a "Raw data" tab at the top
+of the result page, which should give something more readable to the
+screen reader.</p>
+
+<ul>
+  <li><a href="https://nominatim.openstreetmap.org/search?q=Lostwithiel&format=json">https://nominatim.openstreetmap.org/search?q=Lostwithiel&format=json</a></li>
+  <li><a href="https://nominatim.openstreetmap.org/?addressdetails=1&q=bakery+in+berlin+wedding&format=json&limit=1">https://nominatim.openstreetmap.org/?addressdetails=1&q=bakery+in+berlin+wedding&format=json&limit=1</a></li>
+</ul>
+
+</body> </html>
